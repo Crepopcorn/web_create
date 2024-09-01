@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - Personal Profile</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        header {
+            background: linear-gradient(135deg, #1f4b99, #2a91d6);
+            color: #fff;
+            padding: 150px 20px;
+            position: relative;
+            clip-path: ellipse(75% 100% at 50% 0%);
+            text-align: center;
+        }
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+        .profile-picture {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background-color: #fff;
+            overflow: hidden;
+            border: 5px solid #fff;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+        }
+        .profile-picture img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        header h1 {
+            font-size: 4.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        header p {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            padding: 20px 0;
+            background-color: #1a1a1a;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        nav a {
+            color: #e0e0e0;
+            text-decoration: none;
+            margin: 0 20px;
+            font-weight: 600;
+            position: relative;
+            transition: color 0.3s;
+        }
+        nav a::before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #2a91d6;
+            transition: width 0.3s;
+        }
+        nav a:hover::before {
+            width: 100%;
+        }
+        section {
+            padding: 80px 20px;
+            margin: 40px 0;
+            background-color: #1a1a1a;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+        }
+        section:hover {
+            transform: translateY(-10px);
+        }
+        section h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            font-weight: 600;
+            color: #2a91d6;
+        }
+        section p {
+            font-size: 1.2em;
+            max-width: 800px;
+            margin: 0 auto 20px;
+            color: #b0b0b0;
+        }
+        .btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 25px;
+            font-size: 1em;
+            color: #fff;
+            background-color: #1f4b99;
+            border-radius: 30px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #2a91d6;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .container .card {
+            flex: 1;
+            min-width: 280px;
+            max-width: 300px;
+            background-color: #252525;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .container .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        .container .card img {
+            width: 100%;
+            height: auto;
+        }
+        .container .card .content {
+            padding: 20px;
+            text-align: left;
+        }
+        .container .card .content h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: #e0e0e0;
+        }
+        .container .card .content p {
+            font-size: 1em;
+            color: #b0b0b0;
+        }
+        .skills-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 60px 20px;
+            background-color: #2a91d6;
+            border-radius: 15px;
+            margin: 40px 0;
+            color: #fff;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+        .skill {
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+            margin: 20px;
+        }
+        .skill h3 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        .skill p {
+            font-size: 1.2em;
+        }
+        .timeline {
+            position: relative;
+            padding: 60px 0;
+            list-style-type: none;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: #2a91d6;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .timeline-year{
+            left: 55%;
+            margin: 20px 0;
+            position: relative;
+        }
+        .timeline-year h2 {
+            font-size: 2.0em;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+        .timeline-item {
+            margin: 20px 0;
+            position: relative;
+            width: 50%;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            background: #252525;
+        }
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            transform: translateX(-100%);
+        }
+        .timeline-item h3 {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+            color: #2a91d6;
+        }
+        .timeline-item p {
+            font-size: 1.1em;
+            color: #b0b0b0;
+        }
+        footer {
+            background-color: #121212;
+            color: #b0b0b0;
+            text-align: center;
+            padding: 20px 0;
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3);
+        }
+        footer p {
+            margin: 10px 0;
+        }
+        footer a {
+            color: #2a91d6;
+            text-decoration: underline;
+        }
+        @media (min-width: 768px) {
+            header h1 {
+                font-size: 5em;
+            }
+            section {
+                padding: 100px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <div class="profile-picture">
+                <img src="./directory/profile.jpg" alt="Profile Picture">
+            </div>
+            <div class="header-text">
+                <h1>Cheah Song Cheng</h1>
+                <p>Creative Developer | NTU Graduate | 22 yrs old</p>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <a href="#about">About</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="#resume">Resume</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <section id="about">
+        <h2>About Me</h2>
+        <p>Hi! I recently graduated from Nanyang Technological University (NTU) EEE.</p>
+        <p>I am enthusiastic about and specialise in software development and machine learning.</p>
+        <p>I've completed multiple technical internships in the semiconductor industry and on academic projects, as well as held leadership positions in student organisations.</p>
+    </section>
+
+    <section id="portfolio">
+        <h2>Portfolio</h2>
+        <div class="container">
+            <div class="card">
+                <img src="./directory/jpg3.jpg" alt="Project 1">
+                <div class="content">
+                    <h3>Development of Dual Camera Sit Posture Monitoring System</h3>
+                    <p><b>NTU Final Year Project</b></p>
+                    <p>Developed a posture recognition app with real-time visualization using PyQt and integrated machine learning models.</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="./directory/jpg2.jpeg" alt="Project 2">
+                <div class="content">
+                    <h3>Implementation of Artificial Intelligence in Virtual Reality</h3>
+                    <p><b>NTU URECA Project</b></p>
+                    <p>Investigated VR NPCs with AI and integrated speech recognition while addressing AI ethics.</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="./directory/jpg1.jpg" alt="Project 3">
+                <div class="content">
+                    <h3>Artificial intelligence for InSAR Unwrapping</h3>
+                    <p><b>NTU URECA Project</b></p>
+                    <p>Investigate AI in unwrapping Interferometric Synthetic Aperture Radar (InSAR) interferogram into absolute phase.</p>
+                </div>
+            </div>
+        </div>
+        <a href="https://github.com/Crepopcorn" class="btn">View Full Portfolio</a>
+    </section>
+
+    <section class="skills-section">
+        <div class="skill">
+            <h3>Software Development</h3>
+            <p>Experienced in Python, Perl, C/C++, and modern frameworks.</p>
+        </div>
+        <div class="skill">
+            <h3>Machine Learning</h3>
+            <p>Specialized in Computer Vision, understand Pytorch and Tensorflow.</p>
+        </div>
+        <div class="skill">
+            <h3>Web Development</h3>
+            <p>Understand Web development with HTML, CSS, and Javascript.</p>
+        </div>
+    </section>
+
+    <section id="resume">
+        <h2>Experience Timeline</h2>
+        <ul class="timeline">
+            <li class="timeline-year">
+                <h2>2024</h2>
+            </li>
+            <li class="timeline-item">
+                <h3>Physical Engineer Intern</h3>
+                <p><b>MediaTek Inc, Singapore</b></p>
+                <p><b>Dec 2022 - Jun 2023</b></p>
+                <p>•	Applied Synopsys PrimeTime to filter invalid signoff for Very Large-Scale Integration (VLSI).</p>
+                <p>•	Engineered an automated error-filtering application for Static Timing Analysis reports using Python, Bash, C, and Perl on Linux system, checking violated paths and filtering 1000 paths in 2 seconds.</p>
+                <p>•	Enhanced and updated the application for better data visualization based on routine team feedback and meetings. </p>
+            </li>
+            <li class="timeline-year">
+                <h2>2023</h2>
+            </li>
+            <li class="timeline-item">
+                <h3>Undergraduate Intern Technical</h3>
+                <p><b>Intel Corporation, Penang, Malaysia</b></p>
+                <p><b>Jun 2022 - Aug 2022</b></p>
+                <p>•	Created and maintained Automation Test Script using Perl and Unix to validate hardware and software functionality.</p>
+                <p>•	Integrated various testing tools and enhanced test frameworks for automated testing, involving CI/CD pipelines.</p>
+                <p>•	Partnered with colleagues and managers to optimize tools, improving scripts’ execution speed by at least 20%.</p>
+                <p>•	Developed tools to automate script transfer, content modification, and address updating based on latest libraries versions.</p>
+            </li>
+            <li class="timeline-year">
+                <h2>2022</h2>
+            </li>
+        </ul>
+        <a href="./directory/resume.pdf" download="resume_cheahsongcheng" class="btn">Download My Resume</a>
+    </section>
+
+    <section id="contact">
+        <h2>Contact Me</h2>
+        <p>If you’re interested in working together, feel free to reach out!</p>
+        <a href="mailto:cheahsongcheng@gmail.com" class="btn">Get in touch</a>
+    </section>
+
+    <footer>
+        <a href="https://www.linkedin.com/in/song-cheng-cheah-4a34a4216/">LinkedIn</a>
+        <a href="https://github.com/Crepopcorn">Github</a>
+        <p>&copy; 2024 Cheah Song Cheng. All rights reserved.</p>
+        <!-- <p><a href="#">Privacy Policy</a></p> -->
+    </footer>
+
+</body>
+</html>
